@@ -5,7 +5,7 @@ import pickle
 import contextvars
 
 app = Flask(__name__)
-model = pickle.load(open('breast_cancer_detector.pickle', 'rb'))
+model = pickle.load(open('breast_cancer_detector2.pickle', 'rb'))
 
 @app.route('/')
 def home():
@@ -16,12 +16,9 @@ def predict():
     input_features = [float(x) for x in request.form.values()]
     features_value = [np.array(input_features)]
     
-    features_name = [ 'mean concavity',
-       'mean concave points', 'area error',
-        'compactness error', 'concavity error',
-       'worst texture',  'worst area',
-       'worst smoothness', 
-       'worst concave points', 'worst symmetry']
+    features_name = ['mean radius','mean texture','mean perimeter' , 'mean area' ,
+                     'perimeter error','area error',
+        'worst radius','worst texture', 'worst perimeter',  'worst area', 'worst concavity']
     
     df = pd.DataFrame(features_value, columns=features_name)
     output = model.predict(df)
