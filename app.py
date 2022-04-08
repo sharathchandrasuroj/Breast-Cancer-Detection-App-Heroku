@@ -3,6 +3,7 @@ import pandas as pd
 from flask import Flask, request, render_template
 import pickle
 import contextvars
+from collections.abc import Mapping
 
 app = Flask(__name__)
 model = pickle.load(open('breast_cancer_detector2.pickle', 'rb'))
